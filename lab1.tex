@@ -40,11 +40,22 @@ Section 004 (Abraham Yakisan)\\
 \end{center}
 
 % space between title and abstract
-\vspace{4in}
+\vspace{5in}
 
 
 \begin{abstract}
-abstract here 
+
+This experiment demonstrates the CD4007UB integrated circuit and its functionality. The CD4007UB is a dual complimentary pair 
+plus inverter chip, containing 3 pMOSFET transistors and 3 nMOSFET transistors. This experiment tests the chip by determining 
+the voltage transfer characteristic of the inverter in the chip to properly examine its properties and various voltage thresholds.
+The experiment later uses the CD4007UB to create a digital ring oscillator to measure the propagation delay of the inverters. \\
+
+The experiment found that the transfer characteristic appeared as expected, with voltage properties being within reason for
+the chip design. When oriented as a ring oscillator, the performance remained good, with oscillation frequency and 
+propagation delay being within the limits set by the manufacturer as stated on the product datasheet.
+
+
+
 \end{abstract}
 
 \newpage
@@ -101,6 +112,8 @@ An analogy for what this control does is that it ``squishes'' or ``stretches'' t
 The trigger level is a set voltage that the oscilloscope looks for when measuring signals to create stability in the
 image shown. The level of the trigger determines at what voltage and time the signal lines up with.\\
 
+\newpage
+
 Below is a screenshot containing the signal displayed in normal mode.
 
 \begin{center}
@@ -122,6 +135,8 @@ For using the DMM and DC power supply, the DC RMS and AC RMS values were measure
 \begin{equation}
     AC_{RMS} = 0.003V
 \end{equation}
+
+\vspace{7pt}
 
 Knowing the nominal value for the $DC_{RMS}$ being 3.3V, the following error calculation can be achieved:
 
@@ -163,6 +178,7 @@ $V_{DD}$ was set to 5V DC, and $v_{in}$ was a 500 Hz 0V to 5V triangle wave.\\
 The oscilloscope display was captured showing $v_{in}$ and $v_{out}$ as signals. The oscilloscope display was then changed 
 to be in XY mode, such that $v_{in}$ represented the horizontal axis, and $v_{out}$ represented the vertical axis.\\
 
+\newpage
 
 \subsection*{Results / Calculations}
 
@@ -173,6 +189,8 @@ The following screenshot shows $v_{in}$ and $v_{out}$ displayed as 2 channels in
 \begin{center}
     \includegraphics[scale=0.5]{scope2.png}
 \end{center}
+
+\newpage
 
 \textbf{Step 7}\\
 
@@ -185,6 +203,8 @@ what mode the transistor is in, and which voltages correlate with those descript
 \end{center}
 
 \vspace{7pt}
+
+\newpage
 
 \textbf{Step 8}\\
 
@@ -204,6 +224,8 @@ are $V_{IL}$ = 4.5V, and $V_{IH}$ = 0.5V.\\
 three complimentary pairs of NMOS and PMOS transistors. The transfer characteristic was found, and various intrinsic properties 
 of this characteristic were determined and shown to be within limits and reasonable values. \\
 
+\newpage
+
 \section*{Task 3}
 
 \subsection*{Objective}
@@ -212,11 +234,69 @@ and to find its oscillation frequency and propagation delay of the inverter circ
 
 \subsection*{Procedure}
 
+\indent\indent The circuit below was built using a CD4007UB chip by wiring the three inverters together in a loop.\\
+
+\begin{center}
+    \includegraphics[scale=0.35]{ringoscillator.png}
+\end{center}
+
+The circuit is then measured with an oscilloscope at $v_{in}$ and $v_{out}$ to measure oscillation frequency 
+and propagation delay.\\
+
 \subsection*{Results / Calculations}
 
-\subsection*{Conclusions}
+The circuit was built, and oscillation began on its own, without the aid of a kick start with a resistor and $V_{DD}$.
+
 \newpage
 
-\printbibliography[title={\Large References}] %Prints out the bibliography sources that you have used in the document.
+The following is the oscilloscope display showing $v_{in}$ and $v_{out}$. 
+
+\begin{center}
+    \includegraphics[scale=0.5]{scope5.png}
+\end{center}
+
+The display shows the oscillation frequency $f_{osc}$ to be 4.39 MHz. The ideal oscillation frequency is:
+
+\begin{equation}
+    f_{osc} \approx \frac{1}{3} * (t_{PLH} + t_{PHL})
+\end{equation}
+
+Where $t_{PLH}$ and $t_{PHL}$ are the propagation delay from low to high states, and high to low 
+states respectively, measured by comparing $v_{in}$ to $v_{out}$ and measuring the delay between the two.
+
+Below is an oscilloscope screen capture showing the propagation delay with the cursors.
+
+\begin{center}
+    \includegraphics[scale=0.5]{scope6.png}
+\end{center}
+
+
+The measured propagation delay is 38 ns, which when used to calculate ideal oscillation frequency is:
+
+\begin{equation}
+    f_{osc} = \frac{1}{3} * (t_{PLH} + t_{PHL}) = \frac{1}{3} * (38 ns + 38 ns) = \frac{1}{3} * (0.000000076) = 4.38 MHz
+\end{equation}
+
+
+With an error of:
+
+\begin{equation}
+    \% err = \frac{4.39 MHz - 4.38 MHz}{4.38 MHz} = 0.22\% error
+\end{equation}
+
+While this error value can be calculated, the original equation for $f_{osc}$ was an approximation, and thus cannot
+be treated as the true ideal value, however, our value was very close to the approximation.
+
+
+
+\subsection*{Conclusions}
+
+\indent\indent In this task, a ring oscillator was built and demonstrated using a CD4007UB triple complimentary pair circuit arranged
+as three inverters in a loop. The oscillation frequency was measured and verified through the use of propagation delay.
+
+
+%\newpage
+
+%\printbibliography[title={\Large References}] %Prints out the bibliography sources that you have used in the document.
 
 \end{document}
