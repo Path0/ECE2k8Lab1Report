@@ -1,0 +1,1 @@
+pdflatex lab1.tex
